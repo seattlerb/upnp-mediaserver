@@ -1,0 +1,6 @@
+History.txt
+Manifest.txt
+README.txt
+Rakefile
+bin/upnp_media_server
+lib/UPnP/device/media_server.rb
