@@ -32,7 +32,7 @@ the current directory.
 
       option_parser.on('-d', '--directory=DIRECTORY',
                        'Expose a directory to the media server') do |value|
-        options[:directories] << value
+        options[:directories] << File.expand_path(value)
       end
 
       option_parser.on('-n', '--name=NAME',
