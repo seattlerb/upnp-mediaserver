@@ -3,9 +3,12 @@ require 'UPnP/device'
 require 'UPnP/service/content_directory'
 require 'UPnP/service/connection_manager'
 
+##
+# A UPnP MediaServer.  See upnp.org for specifications.
+
 class UPnP::Device::MediaServer < UPnP::Device
 
-  VERSION = '1.0'
+  VERSION = '1.0.0'
 
   add_service_id UPnP::Service::ContentDirectory, 'ContentDirectory'
   add_service_id UPnP::Service::ConnectionManager, 'ConnectorManager'
@@ -40,10 +43,13 @@ the current directory.
   end
 
   ##
-  # Runs a MediaServer.
+  # Runs a MediaServer.  Automatically adds the current directory if no
+  # directories were specified.
 
   def self.run(argv = ARGV)
     super
+
+    @options[:directories] << Dir.pwd if @options[:directories].empty?
 
     device = create 'MediaServer', @options[:name] do |ms|
       ms.manufacturer     = 'Seattle Ruby Brigade'
