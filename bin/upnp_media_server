@@ -5,20 +5,5 @@ Thread.abort_on_exception = true
 require 'rubygems'
 require 'UPnP/device/media_server'
 
-name = Socket.gethostname.split('.', 2).first
-
-device = UPnP::Device.create 'MediaServer', name do |ms|
-  ms.manufacturer     = 'Seattle Ruby Brigade'
-  ms.manufacturer_url = 'http://seattlerb.org'
-
-  ms.model_description = "Ruby Media Server version #{ms.class::VERSION}"
-  ms.model_name        = 'Ruby Media Server'
-  ms.model_url         = 'http://seattlerb.org/UPnP-MediaServer'
-  ms.model_number      = UPnP::Device::MediaServer::VERSION
-
-  ms.add_service 'ContentDirectory'
-  ms.add_service 'ConnectionManager'
-end
-
-device.run
+UPnP::Device::MediaServer.run
 
